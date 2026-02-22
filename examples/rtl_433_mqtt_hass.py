@@ -3,6 +3,7 @@
 
 from __future__ import print_function
 from __future__ import with_statement
+import ssl
 
 AP_DESCRIPTION="""
 Publish Home Assistant MQTT auto discovery topics for rtl_433 devices.
@@ -1031,9 +1032,10 @@ def rtl_433_bridge():
         mqttc.username_pw_set(args.user, args.password)
 
     if args.tls or args.ca_cert is not None:
+        verify_mode = ssl.CERT_NONE
         # mqttc.tls_set(certfile=args.cert, keyfile=args.key, ca_certs=args.ca_cert)
         logging.debug("MQTT Client: Using TLS")
-        mqttc.tls_set()
+        mqttc.tls_set(cert_reqs=verify_mode)
 
     mqttc.on_connect = mqtt_connect
     mqttc.on_disconnect = mqtt_disconnect
