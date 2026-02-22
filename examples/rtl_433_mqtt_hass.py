@@ -1031,7 +1031,9 @@ def rtl_433_bridge():
         mqttc.username_pw_set(args.user, args.password)
 
     if args.tls or args.ca_cert is not None:
-        mqttc.tls_set(certfile=args.cert, keyfile=args.key, ca_certs=args.ca_cert)
+        # mqttc.tls_set(certfile=args.cert, keyfile=args.key, ca_certs=args.ca_cert)
+        logging.debug("MQTT Client: Using TLS")
+        mqttc.tls_set()
 
     mqttc.on_connect = mqtt_connect
     mqttc.on_disconnect = mqtt_disconnect
