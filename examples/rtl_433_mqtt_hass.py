@@ -1036,6 +1036,7 @@ def rtl_433_bridge():
         # mqttc.tls_set(certfile=args.cert, keyfile=args.key, ca_certs=args.ca_cert)
         logging.debug("MQTT Client: Using TLS")
         mqttc.tls_set(cert_reqs=verify_mode)
+        mqttc.tls_insecure_set(True)
 
     mqttc.on_connect = mqtt_connect
     mqttc.on_disconnect = mqtt_disconnect
